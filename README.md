@@ -5,22 +5,23 @@ Welcome to Gravia, your personal desktop AI virtual assistant! Gravia is designe
 ## Features
 
 ### 1. Question and Answer
-Gravia is equipped to answer any question you throw at it. Whether you need information on a specific topic or assistance with a problem, Gravia is here to help.
+Gravia is equipped to answer any question you throw at it. Whether you need information on a specific topic or assistance with a problem, Gravia is here to help. It provides answers with speed and accuracy, making it a valuable resource for your daily inquiries.
 
 ### 2. Desktop Automation
 Gravia simplifies your workflow by performing desktop automation tasks such as opening or closing applications and websites. You can also instruct Gravia to execute specific keyboard shortcuts for browser automation, making your browsing experience more efficient.
 
-### 3. Weather Forecast
-Stay updated on the latest weather conditions with Gravia. Simply ask for the weather forecast, and Gravia will provide you with real-time weather information so you can plan your day accordingly.
-
-### 4. News Reporting
-Get instant access to the latest news headlines and updates from around the world. Gravia keeps you informed and up-to-date on current events, ensuring you never miss important news.
-
-### 5. Real-time Data Access
+### 3. Real-time Data Access
 Gravia enables you to access real-time data on various topics, ranging from stock prices to sports scores. Stay informed and make informed decisions with Gravia's real-time data access feature.
 
-### 6. Image Generation
-Need images for your projects or presentations? Gravia can generate images based on your specifications, saving you time and effort in sourcing visual content.
+### 4. Gmail Integration
+Gravia seamlessly integrates with your Gmail account, allowing you to send emails, check your inbox, and manage your emails directly from the Gravia interface. Stay connected and organized with Gravia's Gmail integration.
+
+### 5. Weather Forecast
+Stay updated on the latest weather conditions with Gravia. Simply ask for the weather forecast, and Gravia will provide you with real-time weather information so you can plan your day accordingly.
+
+### 6. News Reporting
+Get instant access to the latest news headlines and updates from around the world. Gravia keeps you informed and up-to-date on current events, ensuring you never miss important news.
+
 
 ## Getting Started
 
@@ -55,6 +56,17 @@ If you find Gravia helpful and enjoyable to use, we encourage you to spread the 
 Thank you for your support and for choosing Gravia. Together, we're shaping the future of desktop AI virtual assistants!
 
 Certainly! Here's the addition of the warning about the preview version:
+
+## Upcoming Features
+ - Wake word detection
+ - Multi-language support
+ - More 3rd party integrations
+ - More device support
+ - More automation features
+ - More customization options
+ - HD voice support
+ - Alarms and reminders support
+ - ... and more
 
 ## Warning: Preview Version
 
