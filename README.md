@@ -60,18 +60,10 @@ Certainly! Here's the addition of the warning about the preview version:
 ## Upcoming Features
  - Wake word detection
  - Multi-language support
- - More 3rd party integrations
+ - More 3rd party integrations including Google Workspace, Microsoft 365, Spotofy, etc.
  - More device support
  - More automation features
  - More customization options
  - HD voice support
  - Alarms and reminders support
  - ... and more
-
-## Warning: Preview Version
-
-Please note that Gravia is currently in the preview version. While we have worked diligently to ensure a smooth and reliable experience, it's important to understand that some features may not work as expected or may not be available in this initial release.
-
-We are continuously refining and improving Gravia, and future updates will bring additional features, enhancements, and optimizations to enhance your experience. Your feedback and suggestions play a crucial role in shaping the future of Gravia, and we appreciate your patience and understanding as we work to deliver the best possible AI virtual assistant for your desktop.
-
-Thank you for your support and understanding as we continue to evolve Gravia into a powerful and versatile tool for simplifying your daily tasks and enhancing your productivity.
