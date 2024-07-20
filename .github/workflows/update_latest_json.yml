@@ -1,0 +1,48 @@
+name: Update latest.json
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # This will trigger on version tags like v1.0.0
+
+jobs:
+  update-latest-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Generate latest.json
+        id: create_json
+        run: |
+          VERSION=$(git describe --tags)
+          DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          MSI_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.msi"
+          MSI_SIG_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.msi.sig"
+          NSIS_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.setup.exe"
+          NSIS_SIG_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.setup.exe.sig"
+          cat <<EOF > latest.json
+          {
+            "version": "${VERSION}",
+            "notes": "",
+            "pub_date": "${DATE}",
+            "platforms": {
+              "windows-x86_64-msi": {
+                "signature": "${MSI_SIG_URL}",
+                "url": "${MSI_URL}"
+              },
+              "windows-x86_64": {
+                "signature": "${NSIS_SIG_URL}",
+                "url": "${NSIS_URL}"
+              }
+            }
+          }
+          EOF
+
+      - name: Upload latest.json
+        uses: softprops/action-gh-release@v1
+        with:
+          files: latest.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
