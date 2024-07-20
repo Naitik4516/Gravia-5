@@ -55,8 +55,6 @@ If you find Gravia helpful and enjoyable to use, we encourage you to spread the 
 
 Thank you for your support and for choosing Gravia. Together, we're shaping the future of desktop AI virtual assistants!
 
-Certainly! Here's the addition of the warning about the preview version:
-
 ## Upcoming Features
  - Wake word detection
  - Multi-language support
