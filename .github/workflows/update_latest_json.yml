@@ -28,7 +28,7 @@ jobs:
         id: create_json
         run: |
           VERSION=${{ github.ref_name }}
-          DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          DATE=$(date)
           NOTES=${{ steps.get_release.outputs.notes }}
           MSI_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.msi"
           MSI_SIG_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.msi.sig"
