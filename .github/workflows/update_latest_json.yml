@@ -27,7 +27,7 @@ jobs:
       - name: Generate latest.json
         id: create_json
         run: |
-          VERSION=${{ github.ref_name }}
+          VERSION=$(git describe --tags)
           DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           NOTES=${{ steps.get_release.outputs.notes }}
           NSIS_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.setup.exe"
