@@ -30,8 +30,6 @@ jobs:
           VERSION=${{ github.ref_name }}
           DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           NOTES=${{ steps.get_release.outputs.notes }}
-          MSI_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.msi"
-          MSI_SIG_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.msi.sig"
           NSIS_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.setup.exe"
           NSIS_SIG_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.setup.exe.sig"
           cat <<EOF > latest.json
@@ -40,10 +38,6 @@ jobs:
             "notes": "${NOTES}",
             "pub_date": "${DATE}",
             "platforms": {
-              "windows-x86_64-msi": {
-                "signature": "${MSI_SIG_URL}",
-                "url": "${MSI_URL}"
-              },
               "windows-x86_64": {
                 "signature": "${NSIS_SIG_URL}",
                 "url": "${NSIS_URL}"
