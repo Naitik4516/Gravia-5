@@ -13,14 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Get release notes
+      - name: Get release notes and assets
         id: get_release
         run: |
           RELEASE_URL="https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}"
-          echo "Fetching release notes from $RELEASE_URL"
+          echo "Fetching release details from $RELEASE_URL"
           RESPONSE=$(curl -s $RELEASE_URL)
           NOTES=$(echo $RESPONSE | jq -r '.body')
+          ASSETS=$(echo $RESPONSE | jq -r '.assets | map(.name) | join(",")')
           echo "::set-output name=notes::$NOTES"
+          echo "::set-output name=assets::$ASSETS"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -30,8 +32,16 @@ jobs:
           VERSION=$(git describe --tags)
           DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           NOTES="${{ steps.get_release.outputs.notes }}"
-          NSIS_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.setup.exe"
-          NSIS_SIG_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/app.setup.exe.sig"
+          ASSETS="${{ steps.get_release.outputs.assets }}"
+
+          # Find the correct asset names
+          NSIS_FILE=$(echo $ASSETS | tr ',' '\n' | grep 'setup.exe$')
+          NSIS_SIG_FILE=$(echo $ASSETS | tr ',' '\n' | grep 'setup.exe.sig$')
+
+          # Construct the URLs
+          NSIS_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/${NSIS_FILE}"
+          NSIS_SIG_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/${NSIS_SIG_FILE}"
+
           cat <<EOF > latest.json
           {
             "version": "${VERSION}",
