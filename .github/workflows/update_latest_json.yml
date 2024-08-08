@@ -19,7 +19,7 @@ jobs:
           RELEASE_URL="https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}"
           echo "Fetching release details from $RELEASE_URL"
           RESPONSE=$(curl -s $RELEASE_URL)
-          NOTES=$(echo $RESPONSE | jq -r '.body')
+          NOTES=$(echo $RESPONSE | jq -r '.body' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
           ASSETS=$(echo $RESPONSE | jq -r '.assets | map(.name) | join(",")')
           echo "::set-output name=notes::$NOTES"
           echo "::set-output name=assets::$ASSETS"
