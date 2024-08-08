@@ -15,7 +15,7 @@ jobs:
 
       - name: Generate Release Notes
         id: notes
-        uses: RedCrafter07/release-notes-action@v1
+        uses: RedCrafter07/release-notes-action@v1.0.0
         with:
           tag-name: ${{ github.ref_name }}  # Use the tag name to generate release notes
           token: ${{ secrets.GITHUB_TOKEN }}
