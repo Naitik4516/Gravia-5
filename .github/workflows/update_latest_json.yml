@@ -13,30 +13,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Get release notes and assets
-        id: get_release
+      - name: Generate Release Notes
+        id: notes
+        uses: RedCrafter07/release-notes-action@v1
+        with:
+          tag-name: ${{ github.ref_name }}  # Use the tag name to generate release notes
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get release assets
+        id: get_assets
         run: |
           RELEASE_URL="https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}"
-          echo "Fetching release details from $RELEASE_URL"
           RESPONSE=$(curl -s $RELEASE_URL)
-          NOTES=$(echo $RESPONSE | jq -r '.body' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
-          ASSETS=$(echo $RESPONSE | jq -r '.assets | map(.name) | join(",")')
-          echo "::set-output name=notes::$NOTES"
+          ASSETS=$(echo "$RESPONSE" | jq -r '.assets | map(.name) | join(",")')
           echo "::set-output name=assets::$ASSETS"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate latest.json
         id: create_json
         run: |
           VERSION=$(git describe --tags)
           DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          NOTES="${{ steps.get_release.outputs.notes }}"
-          ASSETS="${{ steps.get_release.outputs.assets }}"
+          NOTES="${{ steps.notes.outputs.release-notes }}"
+          ASSETS="${{ steps.get_assets.outputs.assets }}"
 
           # Find the correct asset names
-          NSIS_FILE=$(echo $ASSETS | tr ',' '\n' | grep 'setup.exe$')
-          NSIS_SIG_FILE=$(echo $ASSETS | tr ',' '\n' | grep 'setup.exe.sig$')
+          NSIS_FILE=$(echo "$ASSETS" | tr ',' '\n' | grep 'setup.exe$')
+          NSIS_SIG_FILE=$(echo "$ASSETS" | tr ',' '\n' | grep 'setup.exe.sig$')
 
           # Construct the URLs
           NSIS_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION}/${NSIS_FILE}"
@@ -55,6 +57,8 @@ jobs:
             }
           }
           EOF
+
+          echo "Generated JSON: $(cat latest.json)" # Debugging line
 
       - name: Upload latest.json
         uses: softprops/action-gh-release@v1
